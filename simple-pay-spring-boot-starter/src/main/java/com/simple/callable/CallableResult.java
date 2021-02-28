@@ -34,4 +34,15 @@ public class CallableResult {
     public void setData(Object data) {
         this.data = data;
     }
+
+
+    public static CallableResult ok(){
+        return ok(true,null);
+    }
+
+    public static CallableResult ok(boolean success,Object data){
+        return new CallableResult(success,data);
+    }
+
+
 }

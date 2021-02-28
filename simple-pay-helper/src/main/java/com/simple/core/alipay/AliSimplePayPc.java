@@ -5,9 +5,9 @@ import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.alipay.api.response.AlipayTradePagePayResponse;
+import com.simple.exception.SimplePayException;
 import com.simple.param.SimplePayParam;
 import com.simple.result.alipay.AliPayUnifiedOrderResult;
-import com.simple.exception.SimplePayException;
 import com.simple.utils.StringUtils;
 
 import java.util.Map;
@@ -19,12 +19,12 @@ public class AliSimplePayPc extends AliSimplePay {
 
     private AlipayClient alipayClient;
 
-    private AliSimplePayConfig config;
+    private AliPayProperties properties;
 
-    public AliSimplePayPc(AlipayClient alipayClient,AliSimplePayConfig config) {
-        super(alipayClient,config);
+    public AliSimplePayPc(AlipayClient alipayClient, AliPayProperties properties) {
+        super(alipayClient,properties);
         this.alipayClient = alipayClient;
-        this.config = config;
+        this.properties = properties;
     }
 
 
@@ -38,7 +38,7 @@ public class AliSimplePayPc extends AliSimplePay {
         //回调通知地址
         String notifyUrl = (String) map.remove("notify_url");
         if(StringUtils.isEmpty(notifyUrl)){
-            notifyUrl = this.config.getNotifyUrl();
+            notifyUrl = this.properties.getNotifyUrl();
         }
         //回调页面
         String returnUrl = (String) map.remove("return_url");

@@ -7,6 +7,7 @@ import com.simple.enums.PayMethod;
  */
 public interface SimplePayOps {
 
+
     /**
      * 指定终端支付
      * @param terminal
@@ -39,6 +40,14 @@ public interface SimplePayOps {
      */
     SimplePay wpp();
 
+
+    /**
+     * 小程序支付
+     * @return
+     */
+    SimplePay applets();
+
+
     /**
      * 根据支付方式和终端获取
      * @param method   支付方式
@@ -52,7 +61,7 @@ public interface SimplePayOps {
      * @param terminal
      * @return
      */
-    SimplePay getWechatPay(String terminal);
+    SimplePay wechatPay(String terminal);
 
 
     /**
@@ -60,7 +69,7 @@ public interface SimplePayOps {
      * @param terminal
      * @return
      */
-    SimplePay getAliPay(String terminal);
+    SimplePay aliPay(String terminal);
 
 
 

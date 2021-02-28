@@ -5,6 +5,7 @@ import com.simple.utils.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -35,6 +36,7 @@ public class SimplePayCallableManager implements SimplePayCallable{
      * @throws SimplePayException
      */
     @Override
+    @Transactional(rollbackFor = SimplePayException.class)
     public CallableResult payCall(CallableParam callableParam) throws SimplePayException {
         return getCallable(callableParam.getOrderNo()).payCall(callableParam);
     }
@@ -46,6 +48,7 @@ public class SimplePayCallableManager implements SimplePayCallable{
      * @throws SimplePayException
      */
     @Override
+    @Transactional(rollbackFor = SimplePayException.class)
     public CallableResult refundCall(CallableParam callableParam) throws SimplePayException {
         return getCallable(callableParam.getOrderNo()).refundCall(callableParam);
     }
@@ -58,6 +61,7 @@ public class SimplePayCallableManager implements SimplePayCallable{
      * @throws SimplePayException
      */
     @Override
+    @Transactional(rollbackFor = SimplePayException.class)
     public CallableResult queryTrade(CallableParam callableParam) throws SimplePayException {
         return getCallable(callableParam.getOrderNo()).queryTrade(callableParam);
     }

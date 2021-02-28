@@ -11,8 +11,8 @@ import com.alipay.api.request.AlipayTradeQueryRequest;
 import com.alipay.api.request.AlipayTradeRefundRequest;
 import com.alipay.api.response.AlipayTradeRefundResponse;
 import com.simple.core.AbstractSimplePay;
-import com.simple.param.SimplePayParam;
 import com.simple.exception.SimplePayException;
+import com.simple.param.SimplePayParam;
 
 import java.util.Map;
 
@@ -24,11 +24,11 @@ public abstract class AliSimplePay extends AbstractSimplePay {
 
     private AlipayClient alipayClient;
 
-    private AliSimplePayConfig config;
+    private AliPayProperties properties;
 
-    public AliSimplePay(AlipayClient alipayClient,AliSimplePayConfig config) {
+    public AliSimplePay(AlipayClient alipayClient, AliPayProperties properties) {
         this.alipayClient = alipayClient;
-        this.config = config;
+        this.properties = properties;
     }
 
 
@@ -39,7 +39,6 @@ public abstract class AliSimplePay extends AbstractSimplePay {
         try {
             AlipayTradeQueryRequest request = new AlipayTradeQueryRequest();//创建API对应的request类
             String bizContent = JSON.toJSONString(map, SerializerFeature.WriteMapNullValue);
-            System.out.println(bizContent);
             request.setBizContent(bizContent);//设置业务参数
             return (R) alipayClient.execute(request);
         } catch (AlipayApiException e) {
@@ -88,7 +87,7 @@ public abstract class AliSimplePay extends AbstractSimplePay {
 
 
     @Override
-    protected Map<String,Object> getBizContent(SimplePayParam<?> param){
+    public Map<String,Object> getBizContent(SimplePayParam<?> param){
         Map<String, Object> map = super.getBizContent(param);
         String terminal =  (String)map.remove("terminal");
         return map;

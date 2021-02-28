@@ -19,6 +19,11 @@ public class SimplePayException extends Exception{
         this.message = message;
     }
 
+    public SimplePayException(Integer status,String message){
+        this(message);
+        this.status = status;
+    }
+
     public SimplePayException(String messageTpl, String ... args) {
         this(String.format(messageTpl,args));
     }

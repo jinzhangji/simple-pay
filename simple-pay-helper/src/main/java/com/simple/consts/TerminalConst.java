@@ -11,8 +11,10 @@ public class TerminalConst {
     public static final String PC = "pc";
     //app
     public static final String APP = "app";
-    //微信公众号
+    //公众号-生活号
     public static final String WPP = "wpp";
+    //小程序
+    public static final String APPLETS = "applets";
 
 
 }

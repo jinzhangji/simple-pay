@@ -9,4 +9,5 @@ public interface SimplePayFactory {
     SimplePay getSimplePay(String terminal);
 
 
+    SimpleAuth getSimpleAuth(String appType);
 }

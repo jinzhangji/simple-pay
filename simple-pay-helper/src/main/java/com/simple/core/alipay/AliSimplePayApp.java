@@ -19,12 +19,12 @@ public class AliSimplePayApp extends AliSimplePay {
 
     private AlipayClient alipayClient;
 
-    private AliSimplePayConfig config;
+    private AliPayProperties properties;
 
-    public AliSimplePayApp(AlipayClient alipayClient,AliSimplePayConfig config) {
-        super(alipayClient,config);
+    public AliSimplePayApp(AlipayClient alipayClient, AliPayProperties properties) {
+        super(alipayClient,properties);
         this.alipayClient = alipayClient;
-        this.config = config;
+        this.properties = properties;
     }
 
     @Override
@@ -36,7 +36,7 @@ public class AliSimplePayApp extends AliSimplePay {
         String orderNo = (String) map.get("out_trade_no");
         String notifyUrl = (String) map.remove("notify_url");
         if(StringUtils.isEmpty(notifyUrl)){
-            notifyUrl = this.config.getNotifyUrl();
+            notifyUrl = this.properties.getNotifyUrl();
         }
         try{
             AlipayTradeAppPayRequest request = new AlipayTradeAppPayRequest();

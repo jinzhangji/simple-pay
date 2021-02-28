@@ -1,7 +1,7 @@
 package com.simple.param.alipay;
 
-import com.simple.param.AbstractSimplePayParam;
 import com.simple.enums.PayMethod;
+import com.simple.param.AbstractSimplePayParam;
 
 /**
  * Created by Jin.Z.J  2020/11/25

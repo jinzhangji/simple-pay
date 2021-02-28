@@ -19,12 +19,12 @@ public class AliSimplePayWap extends AliSimplePay {
 
     private AlipayClient alipayClient;
 
-    private AliSimplePayConfig config;
+    private AliPayProperties properties;
 
-    public AliSimplePayWap(AlipayClient alipayClient,AliSimplePayConfig config) {
-        super(alipayClient,config);
+    public AliSimplePayWap(AlipayClient alipayClient, AliPayProperties properties) {
+        super(alipayClient,properties);
         this.alipayClient = alipayClient;
-        this.config = config;
+        this.properties = properties;
     }
 
 
@@ -38,10 +38,10 @@ public class AliSimplePayWap extends AliSimplePay {
         String returnUrl = (String) map.remove("return_url");
         String notifyUrl = (String) map.remove("notify_url");
         if(StringUtils.isEmpty(returnUrl)){
-            returnUrl = this.config.getRedirectUrl();
+            returnUrl = this.properties.getRedirectUrl();
         }
         if(StringUtils.isEmpty(notifyUrl)){
-            notifyUrl = this.config.getNotifyUrl();
+            notifyUrl = this.properties.getNotifyUrl();
         }
         AlipayTradeWapPayRequest request = new AlipayTradeWapPayRequest();
         request.setNotifyUrl(notifyUrl);

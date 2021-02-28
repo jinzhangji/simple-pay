@@ -10,5 +10,6 @@ public abstract class AbstractSimplePayFactory{
 
     public abstract SimplePayFactory getFactory(PayMethod method);
 
+    public abstract SimplePayFactory getFactory(PayMethod method,Long propertiesId);
 
 }

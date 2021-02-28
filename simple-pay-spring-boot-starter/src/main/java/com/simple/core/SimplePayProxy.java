@@ -1,8 +1,8 @@
 package com.simple.core;
 
-import com.simple.param.SimplePayParam;
 import com.simple.enums.PayMethod;
 import com.simple.exception.SimplePayException;
+import com.simple.param.SimplePayParam;
 
 /**
  * 支付代理
@@ -20,32 +20,32 @@ public class SimplePayProxy implements SimplePay {
 
     @Override
     public <R> R queryTradeOrder(SimplePayParam<R> param) throws SimplePayException {
-        return getSimplePay(param.method()).queryTradeOrder(param);
+        return getSimplePay(param.method(),param.propertiesId()).queryTradeOrder(param);
     }
 
     @Override
     public <R> R closeOrder(SimplePayParam<R> param) throws SimplePayException {
-        return getSimplePay(param.method()).closeOrder(param);
+        return getSimplePay(param.method(),param.propertiesId()).closeOrder(param);
     }
 
     @Override
     public <R> R refund(SimplePayParam<R> param) throws SimplePayException {
-        return getSimplePay(param.method()).refund(param);
+        return getSimplePay(param.method(),param.propertiesId()).refund(param);
     }
 
     @Override
     public <R> R queryRefund(SimplePayParam<R> param) throws SimplePayException {
-        return getSimplePay(param.method()).queryRefund(param);
+        return getSimplePay(param.method(),param.propertiesId()).queryRefund(param);
     }
 
     @Override
     public <R> R unifiedOrder(SimplePayParam<R> param) throws SimplePayException {
-        return getSimplePay(param.method()).unifiedOrder(param);
+        return getSimplePay(param.method(),param.propertiesId()).unifiedOrder(param);
     }
 
 
-    private SimplePay getSimplePay(PayMethod method) throws SimplePayException{
-        SimplePayFactory simplePayFactory = methodFactory.getFactory(method);
+    private SimplePay getSimplePay(PayMethod method,Long propertiesId) throws SimplePayException{
+        SimplePayFactory simplePayFactory = methodFactory.getFactory(method,propertiesId);
         SimplePay simplePay = simplePayFactory.getSimplePay(this.terminal);
         if(simplePay == null){
             throw new SimplePayException("Non-existent terminal %s",this.terminal);

@@ -1,10 +1,11 @@
 package com.simple.core;
-import com.simple.param.SimplePayParam;
+
 import com.simple.exception.SimplePayException;
+import com.simple.param.SimplePayParam;
 /**
  * Created by Jin.Z.J  2020/11/25
  */
-public interface SimplePay {
+public interface SimplePay extends ISimple{
 
 
     <R> R unifiedOrder(SimplePayParam<R> param) throws SimplePayException;
