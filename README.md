@@ -21,6 +21,7 @@
     - 其他暂未实现...
    
    
+   
         simple-pay:
           wechat:
             mp:
@@ -53,6 +54,7 @@
                 pk12-path: classpath:example.p12
                 refund-notify-url: https://example/api/notify/refund/{id}
                 notify-url: https://example/api/notify/pay/{id}
+
 
 + 启用数据库配置
 
