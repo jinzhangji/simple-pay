@@ -7,10 +7,11 @@
 + 支付宝实现终端:APP、H5 支持：下单、查询(交易查询,退款查询)、关闭、退款
 
 ### 建议开发者使用以下环境，可以避免版本带来的问题
+``` 
     JDK: JDK1.8+
     Maven: 3.6.1
     SpringBoot版本: 2.+
-
+``` 
 ### 微信支付
 + 配置文件
     
@@ -19,9 +20,7 @@
     - 需要h5或公众号支付/授权 需要配置oa
     - 需要app支付/授权 需要配置应用mp
     - 其他暂未实现...
-    
-    
-    
+``` 
     simple-pay:
       wechat:
         mp:
@@ -54,28 +53,26 @@
             pk12-path: classpath:example.p12
             refund-notify-url: https://example/api/notify/refund/{id}
             notify-url: https://example/api/notify/pay/{id}
-
+``` 
 
 + 启用数据库配置
 
-
-        
+``` 
         #项目导入 wechat_pay_config.sql 自己管理  
         simple-pay:
           wechat-db: true
-      
+```
+
 + 使用样例 SpringBoot :
-    - 微信创建订单
-    
-  
-
-
+   
+```
     @Autowired
     private SimplePayTemplate simplePayTemplate;
     
     @Test
     public void testUnifiedOrder(){
     
+        //微信创建订单
         WeChatPayUnifiedOrderParam unifiedOrderParam = SimplePays.WeChat.createUnifiedOrderParam();
         //32位随机字符串
         unifiedOrderParam.setNonce_str(“123123”);
@@ -103,6 +100,6 @@
         }
         System.out.println(JSON.toJSONString(result))
     }
-
+```
 
 #### 支付宝暂未实现,数据库配置,授权...
