@@ -68,7 +68,8 @@
     - 微信创建订单
     
   
-(```)
+
+
     @Autowired
     private SimplePayTemplate simplePayTemplate;
     
@@ -102,6 +103,6 @@
         }
         System.out.println(JSON.toJSONString(result))
     }
-(```)
+
 
 #### 支付宝暂未实现,数据库配置,授权...
