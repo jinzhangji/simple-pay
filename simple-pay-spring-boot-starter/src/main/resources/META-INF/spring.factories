@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.simple.SimplePayAutoConfigure,com.simple.callable.SimplePayCallableManager
