@@ -58,6 +58,7 @@
 
 + 启用数据库配置
 
+
         
         #项目导入 wechat_pay_config.sql 自己管理  
         simple-pay:
@@ -69,7 +70,6 @@
          
         @Autowired
         private SimplePayTemplate simplePayTemplate;
-        
         
         @Test
         public void testUnifiedOrder(){
