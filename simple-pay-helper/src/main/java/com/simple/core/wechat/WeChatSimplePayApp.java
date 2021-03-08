@@ -25,8 +25,6 @@ public class WeChatSimplePayApp extends WeChatSimplePay {
     @Override
     public <R> R unifiedOrder(SimplePayParam<R> param) throws SimplePayException {
 
-        this.properties.getSignKey();//是这个
-
         WeChatUnifiedOrderResult result = super.submitUnifiedOrder(param,(beanMap) -> {
             beanMap.put("appid",this.appId());
             beanMap.put("mch_id",this.properties.getMchid());
