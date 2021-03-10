@@ -1,3 +1,4 @@
+
 package com.simple.enums;
 
 import com.simple.consts.AppConst;
@@ -43,9 +44,9 @@ public enum AliTerminalType {
     }
 
     public static String getAppType(String terminal){
-        for (WeChatTerminalType terminalRef : WeChatTerminalType.values()) {
+        for (AliTerminalType terminalRef : AliTerminalType.values()) {
             if(terminalRef.getTerminal().equalsIgnoreCase(terminal)){
-                return terminalRef.getAppType();
+                return terminalRef.getType();
             }
         }
         return null;
