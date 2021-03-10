@@ -34,17 +34,21 @@ public class SimplePayPropertiesService implements PropertiesService {
     private ReentrantLock lock = new ReentrantLock();
 
 
-    private static final String SELECT_CONFIG_BY_ID = "SELECT * FROM wechat_pay_config WHERE id = ?";
+    private static final String WECHAT_SELECT_CONFIG_BY_ID = "SELECT * FROM wechat_pay_config WHERE id = ?";
 
-    private static final String SELECT_CONFIG_BY_APPTYPE = "SELECT * FROM wechat_pay_config WHERE app_type = ? AND state = 1 AND is_del = 0 ORDER BY rand() LIMIT 1";
+    private static final String WECHAT_SELECT_CONFIG_BY_APPTYPE = "SELECT * FROM wechat_pay_config WHERE app_type = ? AND state = 1 AND is_del = 0 ORDER BY rand() LIMIT 1";
 
+
+    private static final String ALI_SELECT_CONFIG_BY_ID = "SELECT * FROM simple_alipay_config WHERE id = ?";
+
+    private static final String ALI_SELECT_CONFIG_BY_APPTYPE = "SELECT * FROM simple_alipay_config WHERE app_type = ? AND state = 1 AND is_del = 0 ORDER BY rand() LIMIT 1";
 
 
     @Override
     public WeChatPayProperties getWeChatProperties(Long id) {
         WeChatPayProperties properties;
         if(statProperties.isWechatDb()){
-            properties = jdbcTemplate.queryForObject(SELECT_CONFIG_BY_ID,new BeanPropertyRowMapper<>(WeChatPayProperties.class),id);
+            properties = jdbcTemplate.queryForObject(WECHAT_SELECT_CONFIG_BY_ID,new BeanPropertyRowMapper<>(WeChatPayProperties.class),id);
         }else{
             if(this.weChatPayPropertiesMap == null){
                 lock.lock();
@@ -70,7 +74,7 @@ public class SimplePayPropertiesService implements PropertiesService {
     public WeChatPayProperties getWeChatProperties(String appType) {
         WeChatPayProperties properties = null;
         if(statProperties.isWechatDb()){
-            properties = jdbcTemplate.queryForObject(SELECT_CONFIG_BY_APPTYPE,new BeanPropertyRowMapper<>(WeChatPayProperties.class),appType);
+            properties = jdbcTemplate.queryForObject(WECHAT_SELECT_CONFIG_BY_APPTYPE,new BeanPropertyRowMapper<>(WeChatPayProperties.class),appType);
         }else{
             List<StatSimplePayProperties.StatWeChatPayProperties> list = statProperties.getWechat().get(appType);
             if(CollectionUtil.isNotEmpty(list)){
@@ -83,8 +87,9 @@ public class SimplePayPropertiesService implements PropertiesService {
 
     @Override
     public AliPayProperties getAliPayProperties(Long id) {
+        AliPayProperties properties;
         if(statProperties.isAliDb()){
-            //pass
+            properties = jdbcTemplate.queryForObject(ALI_SELECT_CONFIG_BY_ID,new BeanPropertyRowMapper<>(AliPayProperties.class),id);
         }else{
             if(this.aliPayPropertiesMap == null){
                 lock.lock();
@@ -99,19 +104,17 @@ public class SimplePayPropertiesService implements PropertiesService {
                     lock.unlock();
                 }
             }
-            AliPayProperties properties = aliPayPropertiesMap.get(id);
-            setDefaultProp(properties);
-            return properties;
+            properties = aliPayPropertiesMap.get(id);
         }
-
-        return null;
+        setDefaultProp(properties);
+        return properties;
     }
 
     @Override
     public AliPayProperties getAliPayProperties(String appType) {
         AliPayProperties properties = null;
         if(statProperties.isAliDb()){
-            //pass
+            properties = jdbcTemplate.queryForObject(ALI_SELECT_CONFIG_BY_APPTYPE,new BeanPropertyRowMapper<>(AliPayProperties.class),appType);
         }else{
             List<StatSimplePayProperties.StatAliProperties> list = statProperties.getAli().get(appType);
             if(CollectionUtil.isNotEmpty(list)){
